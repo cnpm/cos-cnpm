@@ -18,50 +18,64 @@ function Client(options) {
     return new Client(options);
   }
 
+  this.bucket = options.bucket || 'tnpmnfs';
+  this.region = options.region || 'cn-south';
   sdkConfig.APPID = options.APPID;
   sdkConfig.SECRET_ID = options.SECRET_ID;
   sdkConfig.SECRET_KEY = options.SECRET_KEY;
 }
 
-Client.prototype.upload = function* (filepath, options) {
+Client.prototype.upload = function*(filepath, options) {
   var content = yield fs.readFile(filepath);
   return yield this.uploadBuffer(content, options)
 };
 
-Client.prototype.uploadBuffer = function* (content, options) {
+Client.prototype.uploadBuffer = function*(content, options) {
   var key = trimKey(options.key);
   var contentLength = content.length;
   var body = bufferToReadStream(content); // 转换成 read stream
 
   var params = {
-    Bucket : 'tnpmnfs',    /* 必须 */
-    Region : 'cn-south',  //cn-south、cn-north、cn-east  /* 必须 */
-    Key : key,    /* 必须 */
-    Body : body,    /* 必须 */
-    ContentLength : contentLength,    /* 必须 */
+    Bucket: this.bucket, /* 必须 */
+    Region: this.region,  //cn-south、cn-north、cn-east  /* 必须 */
+    Key: key, /* 必须 */
+    Body: body, /* 必须 */
+    ContentLength: contentLength, /* 必须 */
   };
 
   yield new Promise(function (resolve, reject) {
-    COS.putObject(params, function(err, data) {
-      if(err) {
-        reject(err);
+    COS.putObject(params, function (err, data) {
+      if (err) {
+        return reject(err);
       }
-      resolve(data);
+      resolve(data); // {ETag: 'xxxxxxx'}
     });
   })
 
   return {key: key};
 };
 
-Client.prototype.download = function* (key, savePath, options) {
+Client.prototype.download = function*(key, savePath, options) {
   var filepath = this._getpath(key);
   var content = yield fs.readFile(filepath);
   yield fs.writeFile(savePath, content);
 };
 
-Client.prototype.remove = function* (key) {
-  var filepath = this._getpath(key);
-  yield fs.unlink(filepath);
+Client.prototype.remove = function*(key) {
+  var params = {
+    Bucket: this.bucket, /* 必须 */
+    Region: this.region,  //cn-south、cn-north、cn-east  /* 必须 */
+    Key: key, /* 必须 */
+  };
+
+  yield new Promise(function (resolve, reject) {
+    COS.deleteObject(params, function (err, data) {
+      if (err) {
+        return reject(err);
+      }
+      resolve();
+    })
+  })
 };
 
 function trimKey(key) {

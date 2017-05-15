@@ -19,6 +19,10 @@ var client = require('cos-cnpm')({
   APPID: '',
   SECRET_ID: '',
   SECRET_KEY: '',
+  bucket: 'tnpmnfs',
+  
+  // 从 https://github.com/tencentyun/cos-java-sdk-v5/blob/master/src/main/java/com/qcloud/cos/region/Region.java 中选择。默认是 cn-south 华南
+  region: 'cn-south', 
 })
 ```
 
