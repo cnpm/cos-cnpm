@@ -56,12 +56,29 @@ Client.prototype.uploadBuffer = function*(content, options) {
 };
 
 Client.prototype.download = function*(key, savePath, options) {
-  var filepath = this._getpath(key);
-  var content = yield fs.readFile(filepath);
-  yield fs.writeFile(savePath, content);
+  var key = trimKey(key);
+
+  var params = {
+    Bucket: this.bucket, /* 必须 */
+    Region: this.region,  //cn-south、cn-north、cn-east  /* 必须 */
+    Key: key, /* 必须 */
+    Output: savePath
+  };
+
+
+  yield new Promise(function (resolve, reject) {
+    COS.getObject(params, function (err, data) {
+      if (err) {
+        return reject(err);
+      }
+      resolve(data);
+    })
+  })
 };
 
 Client.prototype.remove = function*(key) {
+  var key = trimKey(key);
+
   var params = {
     Bucket: this.bucket, /* 必须 */
     Region: this.region,  //cn-south、cn-north、cn-east  /* 必须 */

@@ -2,7 +2,7 @@ var path = require('path');
 var fs = require('fs');
 var COS = require('../sdk/cos');
 var filename = '1mb.zip'
-var filepath = path.resolve(__dirname, 'PutObject.js');
+var filepath = path.join(__dirname, 'PutObject.js');
 
 var params = {
     Bucket : 'test',    /* 必须 */
