@@ -22,8 +22,8 @@ describe('test/index.test.js', function () {
     assert(result === 'hello')
   }))
 
-  var uploadFilepath = path.join(__dirname, 'upload_file')
-  var downloadFilepath = path.join(__dirname, 'download_file')
+  var uploadFilepath = path.join(__dirname, 'upload_file.testfile')
+  var downloadFilepath = path.join(__dirname, 'download_file.testfile')
   var filekey = 'test_suite/upload_file'
   var fileContent = String(+new Date());
 
@@ -53,5 +53,10 @@ describe('test/index.test.js', function () {
     } catch (e) {
       assert(e.statusCode === 404)
     }
+  }))
+
+
+  it('should remove not exist key', co.wrap(function *() {
+    yield client.remove('not_exits');
   }))
 })
