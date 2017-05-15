@@ -5,9 +5,9 @@ var path = require('path');
 // 查看您对应的appid相关信息并填充
 // TODO
 
-exports.APPID = '';
-exports.SECRET_ID = '';
-exports.SECRET_KEY = '';
+exports.APPID = process.env.CNPM_COS_APPID || '';
+exports.SECRET_ID = process.env.CNPM_COS_SECRET_ID || '';
+exports.SECRET_KEY = process.env.CNPM_COS_SECRET_KEY || '';
 
 var pkg = JSON.parse(fs.readFileSync(path.join(__dirname, '../', 'package.json')));
 var ua = function() {

@@ -8,6 +8,20 @@ fs storage wrapper for cnpm
 $ npm install cos-cnpm
 ```
 
+## Warning!!!
+
+Only support singleton. Don't initialize two `cos-cnpm` instance.
+
+## Usage
+
+```js
+var client = require('cos-cnpm')({
+  APPID: '',
+  SECRET_ID: '',
+  SECRET_KEY: '',
+})
+```
+
 ## API
 
 All the APIs are following [cnpm nfs guide](https://github.com/cnpm/cnpmjs.org/wiki/NFS-Guide).

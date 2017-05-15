@@ -23,6 +23,10 @@
   "dependencies": {
   },
   "devDependencies": {
-    "mocha": "^1.21.4"
+    "mocha": "^1.21.4",
+    "eventproxy": "^0.3.5",
+    "async": "^2.2.0",
+    "request": "^2.81.0",
+    "xml2js": "^0.4.17"
   }
 }
