@@ -1,6 +1,6 @@
 {
   "name": "cos-cnpm",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "tencent-cloud cos wrapper for cnpm",
   "main": "index.js",
   "scripts": {
@@ -21,12 +21,14 @@
   },
   "license": "MIT",
   "dependencies": {
-  },
-  "devDependencies": {
-    "mocha": "^1.21.4",
-    "eventproxy": "^0.3.5",
     "async": "^2.2.0",
+    "co-fs": "^1.2.0",
+    "eventproxy": "^0.3.5",
     "request": "^2.81.0",
     "xml2js": "^0.4.17"
+  },
+  "devDependencies": {
+    "co": "^4.6.0",
+    "mocha": "^1.21.4"
   }
 }

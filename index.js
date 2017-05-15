@@ -4,7 +4,7 @@
 
 var path = require('path');
 var COS = require('./sdk/cos');
-var fs = require('fs')
+var fs = require('co-fs')
 var stream = require('stream');
 var sdkConfig = require('./sdk/config')
 
