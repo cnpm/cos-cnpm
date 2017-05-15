@@ -16,11 +16,8 @@ function Client(options) {
 }
 
 Client.prototype.upload = function* (filepath, options) {
-  var destpath = this._getpath(options.key);
-  yield ensureDirExists(destpath);
   var content = yield fs.readFile(filepath);
-  yield fs.writeFile(destpath, content);
-  return { key: options.key };
+  return yield this.uploadBuffer(content, options)
 };
 
 Client.prototype.uploadBuffer = function* (content, options) {
