@@ -59,3 +59,4 @@ typings/
 
 
 test/*.testfile
+.DS_Store
