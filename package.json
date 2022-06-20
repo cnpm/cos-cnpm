@@ -1,10 +1,19 @@
 {
   "name": "cos-cnpm",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "tencent-cloud cos wrapper for cnpm",
   "main": "index.js",
+  "engines": {
+    "node": ">= 16.0.0"
+  },
   "scripts": {
-    "test": "make test"
+    "lint": "eslint . --ext .js",
+    "lint:fix": "eslint . --ext .js --fix",
+    "test": "npm run lint:fix && npm run test-local",
+    "test-local": "egg-bin test --full-trace",
+    "t": "egg-bin test --changed --full-trace",
+    "cov": "egg-bin cov --full-trace",
+    "ci": "npm run lint && npm run cov"
   },
   "keywords": [
     "cos",
@@ -21,14 +30,14 @@
   },
   "license": "MIT",
   "dependencies": {
-    "async": "^2.2.0",
-    "co-fs": "^1.2.0",
-    "eventproxy": "^0.3.5",
-    "request": "^2.81.0",
-    "xml2js": "^0.4.17"
+    "cos-nodejs-sdk-v5": "^2.11.6"
   },
   "devDependencies": {
-    "co": "^4.6.0",
-    "mocha": "^1.21.4"
+    "egg-bin": "^4.16.4",
+    "eslint": "^7.32.0",
+    "eslint-config-egg": "^9.0.0",
+    "eslint-plugin-jsdoc": "^39.2.9",
+    "eslint-plugin-node": "^11.1.0",
+    "urllib": "^2.8.0"
   }
 }

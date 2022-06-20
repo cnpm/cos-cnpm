@@ -60,3 +60,9 @@ typings/
 
 test/*.testfile
 .DS_Store
+
+.npmrc
+
+.idea
+
+coverage
