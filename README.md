@@ -15,15 +15,17 @@ Only support singleton. Don't initialize two `cos-cnpm` instance.
 ## Usage
 
 ```js
-var client = require('cos-cnpm')({
-  APPID: '',
-  SECRET_ID: '',
-  SECRET_KEY: '',
-  bucket: 'tnpmnfs',
-  
-  // 从 https://github.com/tencentyun/cos-java-sdk-v5/blob/master/src/main/java/com/qcloud/cos/region/Region.java 中选择。默认是 cn-south 华南
-  region: 'cn-south', 
-})
+import COSClient from 'cos-cnpm';
+
+config.nfs = {
+  client: new COSClient({
+    secretId: '',
+    secretKey: '',
+    bucket: '',
+    region: '',
+  }),
+  // dir: join(config.dataDir, 'nfs'),
+};
 ```
 
 ## API
@@ -37,6 +39,18 @@ All the APIs are following [cnpm nfs guide](https://github.com/cnpm/cnpmjs.org/w
 - `download`: download file by key
 
 - `remove`: remove file by key
+
+- `uploadBytes`: upload bytes
+
+- `appendBytes`: append bytes
+
+- `readBytes`: read bytes
+
+- `list`: list files by prefix
+
+- `url`: get download url
+
+- `urls`: get download urls
 
 ### License
 
