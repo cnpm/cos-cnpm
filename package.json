@@ -1,8 +1,11 @@
 {
   "name": "cos-cnpm",
-  "version": "1.0.2",
+  "version": "2.0.0",
   "description": "tencent-cloud cos wrapper for cnpm",
   "main": "index.js",
+  "files": [
+    "index.js"
+  ],
   "engines": {
     "node": ">= 16.0.0"
   },
