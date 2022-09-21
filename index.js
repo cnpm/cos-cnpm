@@ -149,7 +149,7 @@ class OssWrapper {
         Marker,
       });
       const objects = res.Contents || [];
-      const prefixLength = trimPrefix;
+      const prefixLength = trimPrefix.length;
       const nextFiles = objects.map(o => o.Key.substring(prefixLength));
       files = files.concat(nextFiles);
       Marker = res.NextMarker;
