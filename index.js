@@ -46,13 +46,22 @@ class OssWrapper {
   }
 
   async upload(filePath, options) {
+    if (typeof filePath === 'string') {
+      filePath = fs.createReadStream(filePath);
+    }
     return await this.uploadBuffer(filePath, options);
   }
 
   async uploadBuffer(content, options) {
     const key = trimKey(options.key);
-    const contentLength = content.length;
-    const body = bufferToReadStream(content);
+    let contentLength;
+    let body;
+    if (content instanceof fs.ReadStream) {
+      body = content;
+    } else {
+      contentLength = content.length;
+      body = bufferToReadStream(content);
+    }
     const params = {
       ...this.commonBucketConfig,
       Key: key,
@@ -69,7 +78,7 @@ class OssWrapper {
     if (typeof bytes === 'string') {
       bytes = Buffer.from(bytes);
     }
-    return await this.upload(bytes, options);
+    return await this.uploadBuffer(bytes, options);
   }
 
   async appendBytes(bytes, options) {
